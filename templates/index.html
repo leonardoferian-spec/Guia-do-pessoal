@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lousa Branca - Planejamento de Natal</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #e0e5ec; 
+            margin: 0; 
+            padding: 20px; 
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #b71c1c;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .add-card {
+            background: white; 
+            padding: 20px; 
+            margin-bottom: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .add-card select, .add-card input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        .add-card input { flex: 1; min-width: 200px;}
+        .add-card button {
+            padding: 10px 20px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .add-card button:hover { background: #b71c1c; }
+        
+        .board { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+        .sector { 
+            background: #ffffff; 
+            border-radius: 12px; 
+            padding: 20px; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
+            border-top: 6px solid #2e7d32; 
+        }
+        .sector h2 { 
+            font-size: 1.3em; 
+            margin-top: 0; 
+            color: #1b5e20; 
+            text-transform: uppercase; 
+            border-bottom: 2px dashed #eee;
+            padding-bottom: 10px;
+        }
+        .idea { 
+            background: #fff9c4; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            border-left: 5px solid #fbc02d; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05); 
+            position: relative;
+            transition: transform 0.2s;
+        }
+        .idea:hover { transform: scale(1.02); }
+        .idea.andamento { border-left-color: #2196f3; background: #e3f2fd; }
+        .idea.concluida { border-left-color: #4caf50; background: #e8f5e9; opacity: 0.8; }
+        .idea.concluida .text { text-decoration: line-through; color: #555; }
+        
+        .text { font-size: 1.05em; margin-bottom: 12px; line-height: 1.4;}
+        
+        .actions {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        .status-btn { 
+            font-size: 0.8em; 
+            padding: 5px 10px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 4px; 
+            font-weight: 600;
+        }
+        .btn-pendente { background: #ffe082; color: #7f6000; }
+        .btn-andamento { background: #90caf9; color: #0d47a1; }
+        .btn-concluida { background: #a5d6a7; color: #1b5e20; }
+        .btn-delete { 
+            background: #ef5350; 
+            color: white; 
+            margin-left: auto;
+        }
+        
+        @media (max-width: 600px) {
+            .add-card { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎄 Lousa de Planejamento de Natal</h1>
+        
+        <form class="add-card" id="addForm">
+            <select id="newSector" required>
+                <option value="" disabled selected>Selecione a Área...</option>
+                <option value="Jardim">Jardim</option>
+                <option value="Hall de Entrada">Hall de Entrada</option>
+                <option value="Hall do auditorio/Bloco A">Hall do auditório/Bloco A</option>
+                <option value="Refeitorio">Refeitório</option>
+                <option value="area jardim">Área Jardim</option>
+                <option value="biblioteca">Biblioteca</option>
+                <option value="area externa">Área Externa</option>
+                <option value="porta sala de aula">Porta sala de aula</option>
+            </select>
+            <input type="text" id="newIdea" placeholder="Escreva uma nova ideia aqui..." required>
+            <button type="submit">➕ Adicionar Ideia</button>
+        </form>
+
+        <div class="board" id="board">
+            <h3 style="text-align:center; width: 100%; color:#666;">Carregando ideias...</h3>
+        </div>
+    </div>
+
+    <script>
+        // Ordem fixa para exibição dos setores
+        const sectorOrder = [
+            "Jardim", "area jardim", "Hall de Entrada", "Hall do auditorio/Bloco A", 
+            "Refeitorio", "biblioteca", "area externa", "porta sala de aula"
+        ];
+
+        async function loadIdeas() {
+            try {
+                const response = await fetch('/api/ideas');
+                const ideas = await response.json();
+                renderBoard(ideas);
+            } catch (error) {
+                console.error("Erro ao carregar:", error);
+                document.getElementById('board').innerHTML = '<p style="color:red; text-align:center; width:100%;">Erro ao conectar com o banco de dados.</p>';
+            }
+        }
+
+        function renderBoard(ideas) {
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+            
+            // Agrupar por setor
+            const sectors = {};
+            // Inicializa setores para garantir a ordem mesmo se vazios (opcional)
+            sectorOrder.forEach(s => sectors[s] = []);
+
+            ideas.forEach(idea => {
+                if(!sectors[idea.sector]) sectors[idea.sector] = [];
+                sectors[idea.sector].push(idea);
+            });
+
+            for (const sectorName of sectorOrder) {
+                const sectorIdeas = sectors[sectorName];
+                if (!sectorIdeas || sectorIdeas.length === 0) continue; // Pula setores vazios
+
+                const sectorDiv = document.createElement('div');
+                sectorDiv.className = 'sector';
+                sectorDiv.innerHTML = `<h2>${sectorName}</h2>`;
+                
+                sectorIdeas.forEach(idea => {
+                    const ideaDiv = document.createElement('div');
+                    ideaDiv.className = `idea ${idea.status}`;
+                    ideaDiv.innerHTML = `
+                        <div class="text">${idea.idea}</div>
+                        <div class="actions">
+                            <button class="status-btn btn-pendente" onclick="updateStatus(${idea.id}, 'pendente')">Pendente</button>
+                            <button class="status-btn btn-andamento" onclick="updateStatus(${idea.id}, 'andamento')">Em Andamento</button>
+                            <button class="status-btn btn-concluida" onclick="updateStatus(${idea.id}, 'concluida')">Concluída</button>
+                            <button class="status-btn btn-delete" onclick="deleteIdea(${idea.id})" title="Excluir">✖</button>
+                        </div>
+                    `;
+                    sectorDiv.appendChild(ideaDiv);
+                });
+                
+                board.appendChild(sectorDiv);
+            }
+        }
+
+        async function updateStatus(id, status) {
+            await fetch(`/api/ideas/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status })
+            });
+            loadIdeas();
+        }
+
+        async function deleteIdea(id) {
+            if(confirm('Tem certeza que deseja remover esta ideia?')) {
+                await fetch(`/api/ideas/${id}`, { method: 'DELETE' });
+                loadIdeas();
+            }
+        }
+
+        document.getElementById('addForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const sector = document.getElementById('newSector').value;
+            const idea = document.getElementById('newIdea').value;
+            
+            if(!sector) return alert('Selecione uma área!');
+
+            await fetch('/api/ideas', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sector, idea })
+            });
+            
+            document.getElementById('newIdea').value = '';
+            loadIdeas();
+        });
+
+        // Carrega inicial
+        loadIdeas();
+    </script>
+</body>
+</html>
