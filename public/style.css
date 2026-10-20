@@ -1681,3 +1681,99 @@ select:focus-visible {
     margin: 5px 0 0;
   }
 }
+
+/* Gentle snowfall: more visible in the empty page margins, subdued behind ideas. */
+:root {
+  --snow-color: #6f9fbd;
+  --snow-glow: rgba(255, 255, 255, 0.75);
+}
+
+:root[data-theme="dark"] {
+  --snow-color: #d9efff;
+  --snow-glow: rgba(163, 212, 245, 0.68);
+}
+
+.board-shell {
+  z-index: 1;
+}
+
+.snowfall {
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.snowfall--edges {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+}
+
+.snowfall--inside {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+}
+
+.snowfall__flake {
+  position: absolute;
+  top: -9vh;
+  left: var(--snow-x);
+  display: block;
+  color: var(--snow-color);
+  font-family: "Segoe UI Symbol", "Segoe UI Emoji", sans-serif;
+  font-size: var(--snow-size, 1rem);
+  line-height: 1;
+  opacity: var(--snow-opacity, 0.48);
+  text-shadow: 0 0 7px var(--snow-glow);
+  animation: snowfall-drift var(--snow-duration, 25s) linear var(--snow-delay, 0s) infinite;
+  will-change: transform;
+}
+
+@keyframes snowfall-drift {
+  0% { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+  50% { transform: translate3d(var(--snow-drift, 12px), 52vh, 0) rotate(180deg); }
+  100% { transform: translate3d(0, 116vh, 0) rotate(360deg); }
+}
+
+.snowfall--edges .snowfall__flake:nth-child(1) { --snow-x: 1.5%; --snow-size: 1.25rem; --snow-duration: 24s; --snow-delay: -17s; --snow-drift: 18px; }
+.snowfall--edges .snowfall__flake:nth-child(2) { --snow-x: 5%; --snow-size: 0.8rem; --snow-duration: 31s; --snow-delay: -8s; --snow-drift: -13px; }
+.snowfall--edges .snowfall__flake:nth-child(3) { --snow-x: 9%; --snow-size: 1.05rem; --snow-duration: 28s; --snow-delay: -23s; --snow-drift: 15px; }
+.snowfall--edges .snowfall__flake:nth-child(4) { --snow-x: 13.5%; --snow-size: 0.72rem; --snow-duration: 34s; --snow-delay: -12s; --snow-drift: -18px; }
+.snowfall--edges .snowfall__flake:nth-child(5) { --snow-x: 86.5%; --snow-size: 1.1rem; --snow-duration: 27s; --snow-delay: -20s; --snow-drift: -14px; }
+.snowfall--edges .snowfall__flake:nth-child(6) { --snow-x: 91%; --snow-size: 0.78rem; --snow-duration: 33s; --snow-delay: -5s; --snow-drift: 16px; }
+.snowfall--edges .snowfall__flake:nth-child(7) { --snow-x: 95%; --snow-size: 1.3rem; --snow-duration: 25s; --snow-delay: -14s; --snow-drift: -16px; }
+.snowfall--edges .snowfall__flake:nth-child(8) { --snow-x: 98%; --snow-size: 0.75rem; --snow-duration: 30s; --snow-delay: -25s; --snow-drift: 12px; }
+.snowfall--edges .snowfall__flake:nth-child(9) { --snow-x: 3%; --snow-size: 0.68rem; --snow-duration: 36s; --snow-delay: -29s; --snow-drift: -10px; }
+.snowfall--edges .snowfall__flake:nth-child(10) { --snow-x: 7%; --snow-size: 1.35rem; --snow-duration: 29s; --snow-delay: -2s; --snow-drift: 18px; }
+.snowfall--edges .snowfall__flake:nth-child(11) { --snow-x: 93%; --snow-size: 0.7rem; --snow-duration: 35s; --snow-delay: -18s; --snow-drift: 11px; }
+.snowfall--edges .snowfall__flake:nth-child(12) { --snow-x: 97%; --snow-size: 1.05rem; --snow-duration: 26s; --snow-delay: -10s; --snow-drift: -17px; }
+.snowfall--edges .snowfall__flake:nth-child(13) { --snow-x: 0.4%; --snow-size: 0.8rem; --snow-duration: 32s; --snow-delay: -21s; --snow-drift: 13px; }
+.snowfall--edges .snowfall__flake:nth-child(14) { --snow-x: 11%; --snow-size: 0.9rem; --snow-duration: 30s; --snow-delay: -7s; --snow-drift: -15px; }
+.snowfall--edges .snowfall__flake:nth-child(15) { --snow-x: 89%; --snow-size: 0.9rem; --snow-duration: 34s; --snow-delay: -27s; --snow-drift: 14px; }
+.snowfall--edges .snowfall__flake:nth-child(16) { --snow-x: 99.3%; --snow-size: 1.2rem; --snow-duration: 28s; --snow-delay: -4s; --snow-drift: -12px; }
+
+.snowfall--inside .snowfall__flake {
+  --snow-opacity: 0.13;
+  --snow-color: #668aa4;
+  --snow-size: 0.78rem;
+  text-shadow: none;
+}
+
+:root[data-theme="dark"] .snowfall--inside .snowfall__flake {
+  --snow-opacity: 0.17;
+  --snow-color: #c4e4f8;
+}
+
+.snowfall--inside .snowfall__flake:nth-child(1) { --snow-x: 8%; --snow-duration: 38s; --snow-delay: -19s; --snow-drift: 12px; }
+.snowfall--inside .snowfall__flake:nth-child(2) { --snow-x: 24%; --snow-size: 0.6rem; --snow-duration: 44s; --snow-delay: -32s; --snow-drift: -10px; }
+.snowfall--inside .snowfall__flake:nth-child(3) { --snow-x: 41%; --snow-duration: 41s; --snow-delay: -8s; --snow-drift: 9px; }
+.snowfall--inside .snowfall__flake:nth-child(4) { --snow-x: 57%; --snow-size: 0.65rem; --snow-duration: 46s; --snow-delay: -28s; --snow-drift: -12px; }
+.snowfall--inside .snowfall__flake:nth-child(5) { --snow-x: 72%; --snow-duration: 39s; --snow-delay: -14s; --snow-drift: 11px; }
+.snowfall--inside .snowfall__flake:nth-child(6) { --snow-x: 89%; --snow-size: 0.6rem; --snow-duration: 43s; --snow-delay: -36s; --snow-drift: -9px; }
+.snowfall--inside .snowfall__flake:nth-child(7) { --snow-x: 33%; --snow-size: 0.68rem; --snow-duration: 47s; --snow-delay: -23s; --snow-drift: 10px; }
+.snowfall--inside .snowfall__flake:nth-child(8) { --snow-x: 81%; --snow-duration: 42s; --snow-delay: -3s; --snow-drift: -11px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .snowfall__flake { display: none; animation: none; }
+}

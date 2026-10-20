@@ -6,11 +6,21 @@
   <meta name="theme-color" content="#e4e9ef">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Lousa de Planejamento de Natal</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='christmas-theme-1') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='christmas-snow-1') }}">
   <script src="{{ url_for('static', filename='theme.js', v='christmas-theme-1') }}"></script>
   <script src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 <body>
+  <div class="snowfall snowfall--edges" aria-hidden="true">
+    <span class="snowfall__flake">❄</span><span class="snowfall__flake">❅</span>
+    <span class="snowfall__flake">❄</span><span class="snowfall__flake">❆</span>
+    <span class="snowfall__flake">❄</span><span class="snowfall__flake">❅</span>
+    <span class="snowfall__flake">❆</span><span class="snowfall__flake">❄</span>
+    <span class="snowfall__flake">❅</span><span class="snowfall__flake">❄</span>
+    <span class="snowfall__flake">❆</span><span class="snowfall__flake">❄</span>
+    <span class="snowfall__flake">❅</span><span class="snowfall__flake">❄</span>
+    <span class="snowfall__flake">❆</span><span class="snowfall__flake">❄</span>
+  </div>
   <main class="board-shell">
     <div class="string-lights" aria-hidden="true">
       <span class="light-bulb light-bulb--red"></span>
@@ -81,6 +91,12 @@
     </nav>
 
     <section class="whiteboard-grid" aria-label="Ideias por setor">
+      <div class="snowfall snowfall--inside" aria-hidden="true">
+        <span class="snowfall__flake">❄</span><span class="snowfall__flake">❅</span>
+        <span class="snowfall__flake">❆</span><span class="snowfall__flake">❄</span>
+        <span class="snowfall__flake">❅</span><span class="snowfall__flake">❄</span>
+        <span class="snowfall__flake">❆</span><span class="snowfall__flake">❄</span>
+      </div>
       <div class="sector-grid" id="sectors-grid" aria-live="polite" aria-busy="true"></div>
       <div class="board-message is-visible" id="board-message" role="status">Carregando ideias…</div>
     </section>
