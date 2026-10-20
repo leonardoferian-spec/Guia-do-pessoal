@@ -1724,7 +1724,7 @@ select:focus-visible {
   font-family: "Segoe UI Symbol", "Segoe UI Emoji", sans-serif;
   font-size: var(--snow-size, 1rem);
   line-height: 1;
-  opacity: var(--snow-opacity, 0.48);
+  opacity: var(--snow-opacity, 0.66);
   text-shadow: 0 0 7px var(--snow-glow);
   animation: snowfall-drift var(--snow-duration, 25s) linear var(--snow-delay, 0s) infinite;
   will-change: transform;
@@ -1752,16 +1752,24 @@ select:focus-visible {
 .snowfall--edges .snowfall__flake:nth-child(14) { --snow-x: 11%; --snow-size: 0.9rem; --snow-duration: 30s; --snow-delay: -7s; --snow-drift: -15px; }
 .snowfall--edges .snowfall__flake:nth-child(15) { --snow-x: 89%; --snow-size: 0.9rem; --snow-duration: 34s; --snow-delay: -27s; --snow-drift: 14px; }
 .snowfall--edges .snowfall__flake:nth-child(16) { --snow-x: 99.3%; --snow-size: 1.2rem; --snow-duration: 28s; --snow-delay: -4s; --snow-drift: -12px; }
+.snowfall--edges .snowfall__flake:nth-child(17) { --snow-x: 2.8%; --snow-size: 1.1rem; --snow-duration: 26s; --snow-delay: -11s; --snow-drift: -17px; }
+.snowfall--edges .snowfall__flake:nth-child(18) { --snow-x: 6.4%; --snow-size: 0.86rem; --snow-duration: 33s; --snow-delay: -19s; --snow-drift: 14px; }
+.snowfall--edges .snowfall__flake:nth-child(19) { --snow-x: 10.2%; --snow-size: 1.15rem; --snow-duration: 29s; --snow-delay: -3s; --snow-drift: -12px; }
+.snowfall--edges .snowfall__flake:nth-child(20) { --snow-x: 15.4%; --snow-size: 0.78rem; --snow-duration: 37s; --snow-delay: -24s; --snow-drift: 19px; }
+.snowfall--edges .snowfall__flake:nth-child(21) { --snow-x: 84%; --snow-size: 0.92rem; --snow-duration: 32s; --snow-delay: -6s; --snow-drift: 17px; }
+.snowfall--edges .snowfall__flake:nth-child(22) { --snow-x: 88%; --snow-size: 1.18rem; --snow-duration: 27s; --snow-delay: -22s; --snow-drift: -14px; }
+.snowfall--edges .snowfall__flake:nth-child(23) { --snow-x: 94%; --snow-size: 0.88rem; --snow-duration: 35s; --snow-delay: -13s; --snow-drift: 12px; }
+.snowfall--edges .snowfall__flake:nth-child(24) { --snow-x: 98%; --snow-size: 1.3rem; --snow-duration: 25s; --snow-delay: -28s; --snow-drift: -18px; }
 
 .snowfall--inside .snowfall__flake {
-  --snow-opacity: 0.13;
+  --snow-opacity: 0.2;
   --snow-color: #668aa4;
   --snow-size: 0.78rem;
   text-shadow: none;
 }
 
 :root[data-theme="dark"] .snowfall--inside .snowfall__flake {
-  --snow-opacity: 0.17;
+  --snow-opacity: 0.25;
   --snow-color: #c4e4f8;
 }
 

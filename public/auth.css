@@ -343,3 +343,95 @@ body {
     padding: 22px 16px 18px;
   }
 }
+
+/* Santa's living-room balcony and the toy workshop outside. */
+body {
+  background-image:
+    linear-gradient(115deg, rgba(35,26,31,.12), rgba(14,34,53,.16)),
+    url("santa-balcony.svg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+:root[data-theme="dark"] body {
+  background-image:
+    linear-gradient(115deg, rgba(9,15,25,.22), rgba(8,20,32,.3)),
+    url("santa-balcony.svg");
+}
+
+.login-gift-card {
+  z-index: 1;
+}
+
+.snowfall {
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.snowfall--edges {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+}
+
+.snowfall__flake {
+  position: absolute;
+  top: -9vh;
+  left: var(--snow-x);
+  display: block;
+  color: #f4fbff;
+  font-family: "Segoe UI Symbol", "Segoe UI Emoji", sans-serif;
+  font-size: var(--snow-size, 1rem);
+  line-height: 1;
+  opacity: .74;
+  text-shadow: 0 0 9px rgba(216,240,255,.9);
+  animation: snowfall-drift var(--snow-duration, 25s) linear var(--snow-delay, 0s) infinite;
+  will-change: transform;
+}
+
+.snowfall__flake:nth-child(1) { --snow-x: 1.5%; --snow-size: 1.35rem; --snow-duration: 24s; --snow-delay: -17s; --snow-drift: 18px; }
+.snowfall__flake:nth-child(2) { --snow-x: 5%; --snow-size: .9rem; --snow-duration: 31s; --snow-delay: -8s; --snow-drift: -13px; }
+.snowfall__flake:nth-child(3) { --snow-x: 9%; --snow-size: 1.12rem; --snow-duration: 28s; --snow-delay: -23s; --snow-drift: 15px; }
+.snowfall__flake:nth-child(4) { --snow-x: 13.5%; --snow-size: .8rem; --snow-duration: 34s; --snow-delay: -12s; --snow-drift: -18px; }
+.snowfall__flake:nth-child(5) { --snow-x: 86.5%; --snow-size: 1.18rem; --snow-duration: 27s; --snow-delay: -20s; --snow-drift: -14px; }
+.snowfall__flake:nth-child(6) { --snow-x: 91%; --snow-size: .88rem; --snow-duration: 33s; --snow-delay: -5s; --snow-drift: 16px; }
+.snowfall__flake:nth-child(7) { --snow-x: 95%; --snow-size: 1.4rem; --snow-duration: 25s; --snow-delay: -14s; --snow-drift: -16px; }
+.snowfall__flake:nth-child(8) { --snow-x: 98%; --snow-size: .84rem; --snow-duration: 30s; --snow-delay: -25s; --snow-drift: 12px; }
+.snowfall__flake:nth-child(9) { --snow-x: 3%; --snow-size: .76rem; --snow-duration: 36s; --snow-delay: -29s; --snow-drift: -10px; }
+.snowfall__flake:nth-child(10) { --snow-x: 7%; --snow-size: 1.45rem; --snow-duration: 29s; --snow-delay: -2s; --snow-drift: 18px; }
+.snowfall__flake:nth-child(11) { --snow-x: 93%; --snow-size: .78rem; --snow-duration: 35s; --snow-delay: -18s; --snow-drift: 11px; }
+.snowfall__flake:nth-child(12) { --snow-x: 97%; --snow-size: 1.15rem; --snow-duration: 26s; --snow-delay: -10s; --snow-drift: -17px; }
+.snowfall__flake:nth-child(13) { --snow-x: .4%; --snow-size: .9rem; --snow-duration: 32s; --snow-delay: -21s; --snow-drift: 13px; }
+.snowfall__flake:nth-child(14) { --snow-x: 11%; --snow-size: 1rem; --snow-duration: 30s; --snow-delay: -7s; --snow-drift: -15px; }
+.snowfall__flake:nth-child(15) { --snow-x: 89%; --snow-size: 1rem; --snow-duration: 34s; --snow-delay: -27s; --snow-drift: 14px; }
+.snowfall__flake:nth-child(16) { --snow-x: 99.3%; --snow-size: 1.3rem; --snow-duration: 28s; --snow-delay: -4s; --snow-drift: -12px; }
+.snowfall__flake:nth-child(17) { --snow-x: 2.8%; --snow-size: 1.2rem; --snow-duration: 26s; --snow-delay: -11s; --snow-drift: -17px; }
+.snowfall__flake:nth-child(18) { --snow-x: 6.4%; --snow-size: .96rem; --snow-duration: 33s; --snow-delay: -19s; --snow-drift: 14px; }
+.snowfall__flake:nth-child(19) { --snow-x: 10.2%; --snow-size: 1.25rem; --snow-duration: 29s; --snow-delay: -3s; --snow-drift: -12px; }
+.snowfall__flake:nth-child(20) { --snow-x: 15.4%; --snow-size: .88rem; --snow-duration: 37s; --snow-delay: -24s; --snow-drift: 19px; }
+.snowfall__flake:nth-child(21) { --snow-x: 84%; --snow-size: 1rem; --snow-duration: 32s; --snow-delay: -6s; --snow-drift: 17px; }
+.snowfall__flake:nth-child(22) { --snow-x: 88%; --snow-size: 1.28rem; --snow-duration: 27s; --snow-delay: -22s; --snow-drift: -14px; }
+.snowfall__flake:nth-child(23) { --snow-x: 94%; --snow-size: .98rem; --snow-duration: 35s; --snow-delay: -13s; --snow-drift: 12px; }
+.snowfall__flake:nth-child(24) { --snow-x: 98%; --snow-size: 1.4rem; --snow-duration: 25s; --snow-delay: -28s; --snow-drift: -18px; }
+
+@keyframes snowfall-drift {
+  0% { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+  50% { transform: translate3d(var(--snow-drift, 12px), 52vh, 0) rotate(180deg); }
+  100% { transform: translate3d(0, 116vh, 0) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snowfall__flake { display: none; animation: none; }
+}
+
+@media (max-width: 720px) {
+  body {
+    background-position: center;
+  }
+
+  .login-gift-card {
+    width: min(100%, 460px);
+  }
+}
