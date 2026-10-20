@@ -1548,3 +1548,136 @@ select:focus-visible {
 :root[data-theme="dark"] .button--quiet:hover {
   background: #394a5d;
 }
+
+/* Seasonal details stay decorative so the existing light and dark palettes remain intact. */
+:root {
+  --holiday-pine: #2c7650;
+  --holiday-berry: #bd3a47;
+  --holiday-gold: #bc8c31;
+  --holiday-snow: rgba(255, 255, 255, 0.7);
+}
+
+:root[data-theme="dark"] {
+  --holiday-pine: #83c79b;
+  --holiday-berry: #ee9298;
+  --holiday-gold: #e3c16e;
+  --holiday-snow: rgba(220, 232, 245, 0.48);
+}
+
+.board-shell::before {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 18px;
+  left: 18px;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--holiday-pine) 0 33%,
+    var(--holiday-gold) 33% 36%,
+    var(--holiday-berry) 36% 69%,
+    var(--holiday-gold) 69% 72%,
+    var(--holiday-pine) 72% 100%);
+  opacity: 0.8;
+  content: "";
+  pointer-events: none;
+}
+
+.board-header {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 4% 0%, rgba(44, 118, 80, 0.08), transparent 32%),
+    radial-gradient(ellipse at 96% 0%, rgba(189, 58, 71, 0.075), transparent 28%),
+    linear-gradient(180deg, #f7f9fb, #f1f4f7);
+}
+
+:root[data-theme="dark"] .board-header {
+  background:
+    radial-gradient(ellipse at 4% 0%, rgba(93, 169, 121, 0.11), transparent 32%),
+    radial-gradient(ellipse at 96% 0%, rgba(214, 92, 102, 0.1), transparent 28%),
+    linear-gradient(180deg, #1d2936, #192430);
+}
+
+.brand__icon {
+  border: 1px solid rgba(189, 58, 71, 0.16);
+  background: linear-gradient(145deg, #fff4e4, #fce7e7 58%, #e8f5ec);
+  box-shadow: inset 0 1px 2px rgba(147, 35, 43, 0.08), 0 4px 12px rgba(44, 58, 77, 0.06);
+}
+
+:root[data-theme="dark"] .brand__icon {
+  border-color: rgba(238, 146, 152, 0.22);
+  background: linear-gradient(145deg, #3a3b32, #4b303a 58%, #263d34);
+}
+
+.seasonal-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 7px;
+  padding: 3px 7px;
+  border: 1px solid rgba(44, 118, 80, 0.18);
+  border-radius: 999px;
+  background: rgba(232, 245, 236, 0.76);
+  color: var(--holiday-pine);
+  font-size: 0.61rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+:root[data-theme="dark"] .seasonal-tag {
+  border-color: rgba(131, 199, 155, 0.22);
+  background: rgba(39, 67, 50, 0.58);
+}
+
+.whiteboard-grid::before,
+.whiteboard-grid::after {
+  position: absolute;
+  z-index: 0;
+  color: var(--holiday-pine);
+  opacity: 0.17;
+  pointer-events: none;
+  user-select: none;
+}
+
+.whiteboard-grid::before {
+  top: 13px;
+  right: 22px;
+  content: "❄";
+  font-size: 25px;
+  transform: rotate(12deg);
+}
+
+.whiteboard-grid::after {
+  bottom: 16px;
+  left: 19px;
+  color: var(--holiday-gold);
+  content: "✦";
+  font-size: 20px;
+}
+
+.sector-grid,
+.board-message {
+  position: relative;
+  z-index: 1;
+}
+
+.button--primary {
+  background: linear-gradient(120deg, var(--holiday-berry), #c92d3a);
+}
+
+.button--primary:hover {
+  background: linear-gradient(120deg, #a92d3a, #a81e2d);
+}
+
+.board-footer {
+  border-top: 2px solid rgba(44, 118, 80, 0.28);
+}
+
+:root[data-theme="dark"] .board-footer {
+  border-top-color: rgba(131, 199, 155, 0.3);
+}
+
+@media (max-width: 760px) {
+  .seasonal-tag {
+    margin: 5px 0 0;
+  }
+}

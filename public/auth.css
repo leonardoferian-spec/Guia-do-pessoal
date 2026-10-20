@@ -82,17 +82,66 @@ h1 { margin: 0; font-size: clamp(26px, 6vw, 34px); line-height: 1.15; }
 
 .theme-toggle:hover { background: #f0f3f6; }
 
+/* Subtle holiday accents adapt to the selected theme without changing its base palette. */
+:root {
+  --holiday-pine: #2c7650;
+  --holiday-berry: #bd3a47;
+  --holiday-gold: #bc8c31;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255,255,255,.8), transparent 26rem),
+    radial-gradient(ellipse at 92% 12%, rgba(189,58,71,.08), transparent 22rem),
+    radial-gradient(ellipse at 8% 88%, rgba(44,118,80,.09), transparent 25rem),
+    linear-gradient(145deg, #eef2f6, #dfe5ec 52%, #e8edf2);
+}
+
+.auth-card::before {
+  position: absolute;
+  top: 0;
+  right: 22px;
+  left: 22px;
+  height: 4px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg, var(--holiday-pine) 0 38%, var(--holiday-gold) 38% 42%, var(--holiday-berry) 42% 78%, var(--holiday-gold) 78% 82%, var(--holiday-pine) 82%);
+  content: "";
+  pointer-events: none;
+}
+
+.auth-icon {
+  display: inline-grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border: 1px solid rgba(189,58,71,.14);
+  border-radius: 19px;
+  background: linear-gradient(145deg, #fff4e4, #fce7e7 58%, #e8f5ec);
+  box-shadow: 0 6px 18px rgba(44,58,77,.08);
+}
+
+.auth-card .eyebrow { color: var(--holiday-pine); }
+.auth-form button { background: linear-gradient(120deg, var(--holiday-berry), #c92d3a); }
+.auth-form button:hover { background: #a81e2d; }
+
 :root[data-theme="dark"] {
   color-scheme: dark;
   color: #e7edf4;
   background: #111820;
   --muted: #aab7c6;
   --green: #72d497;
+  --holiday-pine: #83c79b;
+  --holiday-berry: #ee9298;
+  --holiday-gold: #e3c16e;
 }
 
 :root[data-theme="dark"] body {
   background:
     radial-gradient(circle at 12% 12%, rgba(91,111,136,.16), transparent 26rem),
+    radial-gradient(ellipse at 92% 12%, rgba(214,92,102,.1), transparent 22rem),
+    radial-gradient(ellipse at 8% 88%, rgba(93,169,121,.1), transparent 25rem),
     linear-gradient(145deg, #151e29, #101720 52%, #19232e);
 }
 
@@ -101,6 +150,13 @@ h1 { margin: 0; font-size: clamp(26px, 6vw, 34px); line-height: 1.15; }
   background: #1b2733;
   box-shadow: 0 26px 68px rgba(0,0,0,.38), inset 0 0 0 1px rgba(205,220,236,.04);
 }
+
+:root[data-theme="dark"] .auth-icon {
+  border-color: rgba(238,146,152,.22);
+  background: linear-gradient(145deg, #3a3b32, #4b303a 58%, #263d34);
+}
+
+:root[data-theme="dark"] .auth-card .eyebrow { color: var(--holiday-pine); }
 
 :root[data-theme="dark"] h1,
 :root[data-theme="dark"] .admin-list-title {
