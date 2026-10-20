@@ -303,9 +303,10 @@ body {
   margin-bottom: 0;
 }
 
-:root[data-theme="dark"] .login-gift-card {
+:root[data-theme="dark"] .auth-card.login-gift-card {
   --letter-paper: #202d38;
   --letter-edge: #48596a;
+  border-color: transparent;
   background:
     linear-gradient(var(--letter-paper), var(--letter-paper)) padding-box,
     repeating-linear-gradient(135deg,
