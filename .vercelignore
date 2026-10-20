@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+natal.db
+*.db
+.app_secret*
+.env*
+.git/

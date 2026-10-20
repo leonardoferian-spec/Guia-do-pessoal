@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": ["gru1"],
+  "functions": {
+    "app.py": {
+      "excludeFiles": "{.venv/**,**/__pycache__/**,natal.db,.app_secret_key,.env,manage_users.py,migrate_to_postgres.py}"
+    }
+  }
+}

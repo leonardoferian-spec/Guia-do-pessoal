@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e4e9ef">
+  <title>Usuários · Planejamento de Natal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css', v='dark-everywhere-1') }}">
+  <script src="{{ url_for('static', filename='theme.js', v='dark-everywhere-1') }}"></script>
+</head>
+<body>
+  <main class="auth-card admin-card">
+    <button class="theme-toggle auth-theme-toggle" id="theme-toggle" type="button" aria-label="Ativar modo escuro"></button>
+    <div class="auth-icon" aria-hidden="true">👥</div>
+    <p class="eyebrow">Administração</p>
+    <h1>Usuários</h1>
+    <p class="intro">Crie contas autorizadas. Compartilhe a senha inicial diretamente com a pessoa e oriente a troca após o primeiro acesso.</p>
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <div class="notice notice--{{ category }}" role="status">{{ message }}</div>
+    {% endfor %}
+    {% if error %}<div class="notice notice--error" role="alert">{{ error }}</div>{% endif %}
+    <form method="post" action="{{ url_for('admin_users') }}" class="auth-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" maxlength="254" autocomplete="email" required>
+      <label for="role">Perfil</label>
+      <select id="role" name="role" required>
+        <option value="user">Usuário</option>
+        <option value="admin">Administrador</option>
+      </select>
+      <label for="password">Senha inicial (mínimo 12 caracteres)</label>
+      <input id="password" name="password" type="password" minlength="12" autocomplete="new-password" required>
+      <label for="confirm-password">Confirmar senha inicial</label>
+      <input id="confirm-password" name="confirm_password" type="password" minlength="12" autocomplete="new-password" required>
+      <label for="admin-password">Sua senha de administrador (confirmação)</label>
+      <input id="admin-password" name="admin_password" type="password" autocomplete="current-password" required>
+      <button type="submit">Criar conta <span aria-hidden="true">→</span></button>
+    </form>
+
+    <h2 class="admin-list-title">Contas cadastradas</h2>
+    <ul class="admin-user-list">
+      {% for user in users %}
+        <li><span>{{ user.email }}</span><span>{{ user.role }} · {{ 'ativa' if user.is_active else 'desativada' }}</span></li>
+      {% else %}
+        <li>Nenhuma conta cadastrada.</li>
+      {% endfor %}
+    </ul>
+    <p class="auth-footnote"><a href="{{ url_for('index') }}">Voltar para o painel</a></p>
+  </main>
+</body>
+</html>
