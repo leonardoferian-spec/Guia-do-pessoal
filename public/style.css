@@ -1785,3 +1785,88 @@ select:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .snowfall__flake { display: none; animation: none; }
 }
+
+/* Compact desktop layout: align card rows and keep the whole board in view. */
+@media (min-width: 761px) and (min-height: 760px) {
+  body {
+    height: 100vh;
+    overflow: hidden;
+    padding: 16px;
+  }
+
+  .board-shell {
+    height: calc(100vh - 32px);
+    min-height: 0;
+  }
+
+  .board-header {
+    gap: 16px;
+    padding: 32px 24px 14px;
+  }
+
+  .board-toolbar {
+    min-height: 54px;
+    padding: 8px 24px;
+  }
+
+  .whiteboard-grid {
+    min-height: 0;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .whiteboard-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sector-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .sector-card {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 12px 10px;
+  }
+
+  .sector-card:nth-child(odd),
+  .sector-card:nth-child(even) {
+    transform: none;
+  }
+
+  .sector-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .sector-heading {
+    gap: 7px;
+    padding-bottom: 8px;
+  }
+
+  .sector-heading h2 {
+    gap: 6px;
+    font-size: 1.08rem;
+  }
+
+  .idea-list {
+    gap: 6px;
+    margin-top: 9px;
+  }
+
+  .idea-row {
+    gap: 5px;
+    padding: 6px 6px;
+  }
+
+  .sector-footer {
+    margin-top: auto;
+    padding-top: 8px;
+  }
+
+  .board-footer {
+    padding: 10px 20px;
+  }
+}
