@@ -97,7 +97,7 @@ app.jinja_env.globals["csrf_token"] = csrf_token
 @app.before_request
 def authenticate_and_check_csrf():
     endpoint = request.endpoint
-    if endpoint in {"static", "login"}:
+    if endpoint in {"static", "login", "credits"}:
         pass
     elif session.get("user_id"):
         with connect_db() as conn:
@@ -237,6 +237,12 @@ def index():
     return render_template(
         "index.html", user_email=g.user["email"], is_admin=g.user["role"] == "admin"
     )
+
+
+@app.route("/credits")
+def credits():
+    back_url = url_for("index") if session.get("user_id") else url_for("login")
+    return render_template("credits.html", back_url=back_url)
 
 
 @app.route("/account/password", methods=["GET", "POST"])

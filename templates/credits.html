@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>Créditos · Planejamento de Natal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css', v='credits-page-1') }}">
+  <script src="{{ url_for('static', filename='theme.js', v='christmas-theme-1') }}"></script>
+</head>
+<body>
+  <main class="auth-card credits-card">
+    <button class="theme-toggle auth-theme-toggle" id="theme-toggle" type="button" aria-label="Ativar modo escuro"></button>
+    <a class="credits-back" href="{{ back_url }}">← Voltar</a>
+    <p class="eyebrow">Um projeto feito em equipe</p>
+    <h1>Créditos</h1>
+
+    <div class="credits-letter">
+      <p>Querida turma,</p>
+      <p>Este projeto nasceu com um objetivo simples: ajudar nossa turma a se organizar e dar o melhor de si para conquistar o Technonatal.</p>
+      <p>Obrigado a cada pessoa que compartilhou ideias, colaborou e colocou um pouco de si nesse trabalho. Cada contribuição ajudou a transformar o planejamento em algo nosso.</p>
+      <p>Com carinho e gratidão,<br>Jorge e Leonardo</p>
+    </div>
+
+    <div class="credits-developers" aria-label="Desenvolvedores do projeto">
+      <section class="developer-card">
+        <span>Desenvolvedor</span>
+        <h2>Jorge Goes</h2>
+      </section>
+      <section class="developer-card">
+        <span>Desenvolvedor</span>
+        <h2>Leonardo Ferian</h2>
+      </section>
+    </div>
+  </main>
+  {% include "_site_footer.html" %}
+</body>
+</html>
