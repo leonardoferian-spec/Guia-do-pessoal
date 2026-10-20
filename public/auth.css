@@ -345,20 +345,27 @@ body {
   }
 }
 
-/* Santa's living-room balcony and the toy workshop outside. */
+/* Use one fixed scene layer so the crop and zoom cannot change with the theme. */
 body {
-  background-image:
-    linear-gradient(115deg, rgba(35,26,31,.12), rgba(14,34,53,.16)),
-    url("santa-balcony.svg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: #14273a;
+  background-image: none;
 }
 
 :root[data-theme="dark"] body {
-  background-image:
-    linear-gradient(115deg, rgba(35,26,31,.12), rgba(14,34,53,.16)),
-    url("santa-balcony.svg");
+  background-color: #14273a;
+  background-image: none;
+}
+
+body::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background-image: url("santa-balcony.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  content: "";
+  pointer-events: none;
 }
 
 .login-gift-card {
