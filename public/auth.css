@@ -488,3 +488,43 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .auth-theme-toggle { transition: none; }
 }
+
+/* Plain page surfaces; keep the snowfall layer independent from the theme. */
+:root { background: #fff; }
+body { background: #fff; }
+:root[data-theme="dark"] { background: #000; }
+:root[data-theme="dark"] body { background: #000; }
+body::before { display: none; }
+
+.auth-card::before { content: none; }
+.auth-card {
+  border: 1px solid #dce2e9;
+  background: #fff;
+  box-shadow: 0 18px 46px rgba(31, 41, 55, .12);
+}
+.login-gift-card {
+  padding: 24px;
+  border: 1px solid #dce2e9;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 46px rgba(31, 41, 55, .12);
+}
+.santa-letter {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .auth-card,
+:root[data-theme="dark"] .auth-card.login-gift-card {
+  border: 1px solid #303030;
+  background: #111;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, .42);
+}
+:root[data-theme="dark"] .santa-letter {
+  --letter-paper: #111;
+  --letter-edge: transparent;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}

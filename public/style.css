@@ -1262,10 +1262,11 @@ select:focus-visible {
 }
 
 :root[data-theme="dark"] body {
-  background:
-    radial-gradient(circle at 12% 12%, rgba(91, 111, 136, 0.16), transparent 26rem),
-    linear-gradient(145deg, #151e29 0%, #101720 52%, #19232e 100%);
+  background: #000;
 }
+
+body { background: #fff; }
+:root[data-theme="dark"] body { background: #000; }
 
 :root[data-theme="dark"] .board-shell {
   border-color: #293646;

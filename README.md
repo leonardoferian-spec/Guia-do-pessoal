@@ -31,6 +31,16 @@ As tentativas de senha são limitadas por combinação de e-mail e endereço de 
 
 Administradores podem abrir **Atividade** no painel para consultar as 200 ações mais recentes da lousa. O sistema registra quem adicionou uma ideia, mudou seu status ou a removeu, além do IP de origem da requisição; cada registro é salvo junto com a alteração no PostgreSQL/SQLite e só pode ser consultado por administradores.
 
+No PostgreSQL do Neon, os registros também podem ser consultados diretamente pelo **SQL Editor**. A tabela persistente é `idea_activity`; para ver o histórico completo, execute:
+
+```sql
+SELECT id, actor_email, action, sector, idea, client_ip,
+       from_status, to_status,
+       to_timestamp(created_at) AS occurred_at
+FROM idea_activity
+ORDER BY id DESC;
+```
+
 O painel, o login, a troca de senha e a administração de usuários oferecem modo claro e escuro. A escolha fica salva no navegador; sem uma escolha anterior, é usada a preferência de aparência do sistema.
 
 ## Preparar para Vercel
