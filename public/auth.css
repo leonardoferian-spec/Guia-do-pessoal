@@ -356,7 +356,7 @@ body {
 
 :root[data-theme="dark"] body {
   background-image:
-    linear-gradient(115deg, rgba(9,15,25,.22), rgba(8,20,32,.3)),
+    linear-gradient(115deg, rgba(35,26,31,.12), rgba(14,34,53,.16)),
     url("santa-balcony.svg");
 }
 
@@ -434,4 +434,49 @@ body {
   .login-gift-card {
     width: min(100%, 460px);
   }
+}
+
+/* Keep the scene identical in both themes and the theme control a fixed size. */
+.auth-theme-toggle {
+  top: 13px;
+  right: 13px;
+  z-index: 3;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: 0 3px 10px rgba(34,43,55,.16);
+  transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
+}
+
+.auth-theme-toggle:hover {
+  background: #f3e9d8;
+  transform: rotate(-8deg) scale(1.04);
+}
+
+:root[data-theme="dark"] .auth-theme-toggle {
+  border-color: #647487;
+  background: #263747;
+  color: #f5d98b;
+}
+
+:root[data-theme="dark"] .auth-theme-toggle:hover {
+  background: #334b60;
+}
+
+:root[data-theme="dark"] .auth-form button {
+  background: linear-gradient(120deg, #a93e4b, #81323c);
+  color: #fff;
+}
+
+:root[data-theme="dark"] .auth-form button:hover {
+  background: #712a35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-theme-toggle { transition: none; }
 }

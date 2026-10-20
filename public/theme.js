@@ -21,8 +21,12 @@
     const toggle = document.getElementById("theme-toggle");
     if (toggle) {
       const darkModeActive = theme === "dark";
-      toggle.textContent = darkModeActive ? "☀️ Modo claro" : "🌙 Modo escuro";
+      const isLoginToggle = toggle.classList.contains("auth-theme-toggle");
+      toggle.textContent = isLoginToggle
+        ? (darkModeActive ? "☀️" : "🌙")
+        : (darkModeActive ? "☀️ Modo claro" : "🌙 Modo escuro");
       toggle.setAttribute("aria-label", darkModeActive ? "Ativar modo claro" : "Ativar modo escuro");
+      toggle.title = darkModeActive ? "Ativar modo claro" : "Ativar modo escuro";
       toggle.setAttribute("aria-pressed", String(darkModeActive));
     }
     if (persist) {
