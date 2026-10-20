@@ -94,6 +94,11 @@ def csrf_token():
 app.jinja_env.globals["csrf_token"] = csrf_token
 
 
+@app.context_processor
+def inject_copyright_year():
+    return {"copyright_year": time.gmtime().tm_year}
+
+
 @app.before_request
 def authenticate_and_check_csrf():
     endpoint = request.endpoint
