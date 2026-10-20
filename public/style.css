@@ -1870,3 +1870,104 @@ select:focus-visible {
     padding: 10px 20px;
   }
 }
+
+/* Tiny, occasional snowball splats on the empty glass at the side of the board. */
+.snow-impact-layer {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.snow-impact {
+  position: absolute;
+  display: block;
+  width: 54px;
+  height: 54px;
+  color: rgba(239,249,255,.9);
+  filter: drop-shadow(0 0 8px rgba(192,228,248,.6));
+  pointer-events: none;
+}
+
+.snow-impact--one { left: 77%; top: 69%; }
+.snow-impact--two { left: 91%; top: 82%; }
+.snow-impact--three { left: 69%; top: 88%; }
+
+.snow-impact::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  transform: translate(-50%, -50%) scale(.2);
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.95), rgba(205,234,250,.55) 48%, transparent 75%);
+  box-shadow: 0 0 12px rgba(203,235,251,.75);
+  content: "";
+  opacity: 0;
+  animation: snowball-center 17s ease-out infinite;
+}
+
+.snow-impact::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: rgba(245,251,255,.92);
+  content: "❄";
+  font-size: 19px;
+  line-height: 1;
+  opacity: 0;
+  text-shadow: 0 0 8px rgba(211,239,255,.9);
+  transform: translate(-50%, -50%) scale(.2) rotate(-20deg);
+  animation: snowball-center 17s ease-out infinite;
+}
+
+.snow-impact i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border: 1px solid rgba(255,255,255,.95);
+  border-radius: 50%;
+  background: #eaf7ff;
+  box-shadow: 0 0 6px rgba(197,231,249,.8);
+  opacity: 0;
+  animation: snowball-fragments 17s ease-out infinite;
+}
+
+.snow-impact--one::before,
+.snow-impact--one::after,
+.snow-impact--one i { animation-delay: -10s; }
+.snow-impact--two::before,
+.snow-impact--two::after,
+.snow-impact--two i { animation-delay: -4s; }
+.snow-impact--three::before,
+.snow-impact--three::after,
+.snow-impact--three i { animation-delay: -15s; }
+
+@keyframes snowball-center {
+  0%, 55%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(.2) rotate(-20deg); }
+  59% { opacity: .92; transform: translate(-50%, -50%) scale(1.12) rotate(8deg); }
+  66% { opacity: .65; transform: translate(-50%, -50%) scale(.82) rotate(20deg); }
+  78% { opacity: 0; transform: translate(-50%, -50%) scale(1.2) rotate(35deg); }
+}
+
+@keyframes snowball-fragments {
+  0%, 55%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+  59% { opacity: .95; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.15); }
+  67% { opacity: .68; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.9); }
+  80% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.55); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snow-impact,
+  .snow-impact::before,
+  .snow-impact::after,
+  .snow-impact i {
+    display: none;
+    animation: none;
+  }
+}
